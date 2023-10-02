@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { Input } from "@nextui-org/react";
-import { EyeFilledIcon } from "../../assets/EyeFilledIcon";
-import { EyeSlashFilledIcon } from "../../assets/EyeSlashFilledIco";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { EyeFilledIcon } from "../../assets/EyeFilledIcon";
+import { EyeSlashFilledIcon } from "../../assets/EyeSlashFilledIco";
+import GoogleButton from "../../components/GoogleButton";
+import Ilustration from "../../components/auth/Ilustration";
 
 export const SignInPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -12,12 +14,7 @@ export const SignInPage = () => {
   return (
     <div className="w-full  h-[100vh] flex justify-center items-center bg-[#e6e6ed] relative">
       <main className="w-[90%] h-[90%] bg-[#f0eef6] rounded-xl flex md:flex md:justify-center">
-        <article className="hidden  w-[60%] h-full z-50 rounded-xl bg-[#d69afc] lg:flex items-center">
-          <img
-            src="../../public/ilustracion-casa.webp"
-            className="w-full object-cover"
-          ></img>
-        </article>
+        <Ilustration />
         <section className="w-[100%] md:w-[70%] lg:w-[40%] rounded-xl relative">
           <header className="w-full mt-8">
             <h2 className="text-2xl text-center font-semibold mt-10">
@@ -75,6 +72,8 @@ export const SignInPage = () => {
               <p className="text-center text-[#aeacb8] mt-4">
                 Or continue with
               </p>
+              <GoogleButton />
+              {/* <GoogleButtonOneTap/> */}
             </div>
           </form>
         </section>
