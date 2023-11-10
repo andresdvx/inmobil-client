@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Input } from "@nextui-org/react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   EyeFilledIcon,
@@ -9,16 +9,16 @@ import {
 } from "../../assets/InputIcons";
 import Ilustration from "../../components/auth/Ilustration";
 import { SubmitButton } from "../../components/auth/SubmitButton";
-import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import GoogleButton from "../../components/auth/GoogleButton";
+import { AuthZodErrors } from "../../components/auth/AuthErrors";
 
 export const SignUpPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const [user, setUser] = useState({ user: "", email: "", password: "" });
-  const { signUp, errors, userData } = useContext(AuthContext);
+  const { signUp, zodErrors } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -50,16 +50,9 @@ export const SignUpPage = () => {
             <p className="text-center text-[#a9a9b4] mt-5">
               find the house of your dreams
             </p>
-            {errors &&
-              errors.map((error, i) => {
-                return (
-                  <div
-                    key={i}
-                    className="w-[80%] h-12 grid place-items-center bg-[#f56965] relative z-40 mx-auto mb-2 rounded-md"
-                  >
-                    <p className="text-white text-center">{error}</p>
-                  </div>
-                );
+            {zodErrors &&
+              zodErrors.map((zodError, i) => {
+                return <AuthZodErrors key={i} zodError={zodError} />;
               })}
           </header>
           <form

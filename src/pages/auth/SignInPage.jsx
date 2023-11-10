@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Input } from "@nextui-org/react";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   EyeFilledIcon,
@@ -10,15 +10,15 @@ import {
 import GoogleButton from "../../components/auth/GoogleButton";
 import Ilustration from "../../components/auth/Ilustration";
 import { SubmitButton } from "../../components/auth/SubmitButton";
-import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { AuthZodErrors, AuthError } from "../../components/auth/AuthErrors";
 
 export const SignInPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const [user, setUser] = useState({ email: "", password: "" });
-  const { errors,signIn } = useContext(AuthContext);
+  const { error, zodErrors, signIn } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handdleInputChange = (event) => {
@@ -32,7 +32,9 @@ export const SignInPage = () => {
   const hanndleSubmit = async (e) => {
     e.preventDefault();
     const res = await signIn(user);
-    navigate("/feed")
+    if (res.status == 200) {
+      navigate("/feed");
+    }
   };
 
   return (
@@ -47,11 +49,13 @@ export const SignInPage = () => {
             <p className="text-center text-[#a9a9b4] mt-5">
               find the house of your dreams
             </p>
-            {errors !== null && errors !== undefined && errors.message && (
-              <div className="w-[80%] h-12 grid place-items-center bg-[#f56965] relative z-40 mx-auto mb-2 rounded-md">
-                <p className="text-white text-center">{errors.message}</p>
-              </div>
+            {error !== null && error !== undefined && error.message && (
+              <AuthError error={error}/>
             )}
+            {zodErrors &&
+              zodErrors.map((zodError, i) => {
+                return <AuthZodErrors key={i} zodError={zodError} />;
+              })}
           </header>
           <form
             onSubmit={hanndleSubmit}
