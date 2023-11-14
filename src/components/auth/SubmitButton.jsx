@@ -7,7 +7,7 @@ export const SubmitButton = ({text}) => {
     <Button
       type="submit"
       variant="flat"
-      className="w-full h-11 bg-[#f56965] text-white rounded-md "
+      className="w-full h-11 bg-redDefault text-white rounded-md "
     >
     {text}
     </Button>

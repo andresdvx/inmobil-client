@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Input } from "@nextui-org/react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   EyeFilledIcon,
@@ -12,15 +12,22 @@ import { SubmitButton } from "../../components/auth/SubmitButton";
 import { AuthContext } from "../../context/AuthContext";
 import GoogleButton from "../../components/auth/GoogleButton";
 import { AuthZodErrors } from "../../components/auth/AuthErrors";
+import Spinner from "../../components/Spinner";
+import { AuthError } from "../../components/auth/AuthErrors";
 
-export const SignUpPage = () => {
+const SignUpPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const [user, setUser] = useState({ user: "", email: "", password: "" });
-  const { signUp, zodErrors } = useContext(AuthContext);
+  const { signUp, zodErrors, loading, error, authenticated } =
+    useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authenticated) navigate("/feed");
+  }, [authenticated, navigate]);
 
   const handdleInputChange = (event) => {
     const { name, value } = event.target;
@@ -40,6 +47,7 @@ export const SignUpPage = () => {
 
   return (
     <div className="w-full  h-[100vh] flex justify-center items-center bg-[#e6e6ed] relative">
+      {loading && <Spinner />}
       <main className="w-[90%] h-[90%] bg-[#f0eef6] rounded-xl flex md:flex md:justify-center">
         <Ilustration />
         <section className="w-[100%] md:w-[70%] lg:w-[40%] rounded-xl relative">
@@ -50,6 +58,9 @@ export const SignUpPage = () => {
             <p className="text-center text-[#a9a9b4] mt-5">
               find the house of your dreams
             </p>
+            {error !== null && error !== undefined && error.message && (
+              <AuthError error={error} />
+            )}
             {zodErrors &&
               zodErrors.map((zodError, i) => {
                 return <AuthZodErrors key={i} zodError={zodError} />;
@@ -120,3 +131,5 @@ export const SignUpPage = () => {
     </div>
   );
 };
+
+export default SignUpPage;

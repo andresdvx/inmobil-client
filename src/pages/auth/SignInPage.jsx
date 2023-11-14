@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Input } from "@nextui-org/react";
-import { useState,useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { Link, useNavigate,} from "react-router-dom";
 import {
   EyeFilledIcon,
   MailIcon,
@@ -12,14 +12,19 @@ import Ilustration from "../../components/auth/Ilustration";
 import { SubmitButton } from "../../components/auth/SubmitButton";
 import { AuthContext } from "../../context/AuthContext";
 import { AuthZodErrors, AuthError } from "../../components/auth/AuthErrors";
-
-export const SignInPage = () => {
+import Spinner from "../../components/Spinner";
+const SignInPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const [user, setUser] = useState({ email: "", password: "" });
-  const { error, zodErrors, signIn } = useContext(AuthContext);
+  const { error, zodErrors, signIn, loading, authenticated } =
+    useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authenticated) navigate("/feed")
+  }, [authenticated, navigate]);
 
   const handdleInputChange = (event) => {
     const { name, value } = event.target;
@@ -38,25 +43,26 @@ export const SignInPage = () => {
   };
 
   return (
-    <div className="w-full  h-[100vh] flex justify-center items-center bg-[#e6e6ed] relative">
-      <main className="w-[90%] h-[90%] bg-[#f0eef6] rounded-xl flex md:flex md:justify-center">
+    <div className="w-full  h-[100vh] flex justify-center items-center bg-[#e6e6ed] relative dark:bg-background2 ">
+      <main className="w-[90%] h-[90%] bg-[#f0eef6] rounded-xl flex md:flex md:justify-center dark:bg-gray-800">
         <Ilustration />
-        <section className="w-[100%] md:w-[70%] lg:w-[40%] rounded-xl relative">
+        <section className="w-[100%] md:w-[70%] lg:w-[40%] rounded-xl relative dark:bg-gray-800">
           <header className="w-full mt-8">
-            <h2 className="text-2xl text-center font-semibold mt-10">
+            <h2 className="text-2xl text-center font-semibold mt-10 dark:text-white">
               Welcome to inmobil!
             </h2>
             <p className="text-center text-[#a9a9b4] mt-5">
               find the house of your dreams
             </p>
             {error !== null && error !== undefined && error.message && (
-              <AuthError error={error}/>
+              <AuthError error={error} />
             )}
             {zodErrors &&
               zodErrors.map((zodError, i) => {
                 return <AuthZodErrors key={i} zodError={zodError} />;
               })}
           </header>
+
           <form
             onSubmit={hanndleSubmit}
             className="w-full h-[500px] sm:h-[460px] absolute bottom-14 lg:bottom-0 flex flex-col justify-center items-center"
@@ -105,6 +111,11 @@ export const SignInPage = () => {
                 Or continue with
               </p>
               <GoogleButton />
+              {loading && (
+                <div className="w-full flex justify-center mt-2">
+                  <Spinner />
+                </div>
+              )}
             </div>
           </form>
         </section>
@@ -112,3 +123,5 @@ export const SignInPage = () => {
     </div>
   );
 };
+
+export default SignInPage;

@@ -13,7 +13,8 @@ export default {
 
     extend: {
       colors:{
-        'blueTuneado': "#31d2f2"
+        'blueTuneado': "#31d2f2",
+        'redDefault': "#f56965"
       }
     },
   },
@@ -33,7 +34,8 @@ export default {
         dark: {
           layout: {}, // dark theme layout tokens
           colors: {
-            background: "#000"
+            background: "#000",
+            background2: "#00050b"
           }, // dark theme colors
         },
         // ... custom themes
