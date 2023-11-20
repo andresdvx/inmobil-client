@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Input } from "@nextui-org/react";
 import { useState, useContext, useEffect } from "react";
-import { Link, useNavigate,} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   EyeFilledIcon,
   MailIcon,
@@ -18,12 +18,12 @@ const SignInPage = () => {
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   const [user, setUser] = useState({ email: "", password: "" });
-  const { error, zodErrors, signIn, loading, authenticated } =
+  const { userData, error, zodErrors, signIn, loading, authenticated } =
     useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authenticated) navigate("/feed")
+    if (authenticated) navigate("/feed");
   }, [authenticated, navigate]);
 
   const handdleInputChange = (event) => {

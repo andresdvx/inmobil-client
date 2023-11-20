@@ -59,7 +59,9 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await apiGoogleSign(authToken);
       setUserData(response.data);
+      setAuthenticated(true);
       setLoading(true);
+      return response;
     } catch (error) {
       console.log(error);
     }finally{

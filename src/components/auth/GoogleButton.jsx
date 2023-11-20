@@ -10,13 +10,14 @@ export const GoogleButton = () => {
     <div className="mx-auto flex justify-center mt-2">
       <GoogleLogin
         onSuccess={async (credentialResponse) => {
-          console.log(credentialResponse.credential);
           const authToken = credentialResponse.credential;
-          await googleSign(authToken);
+          const response = await googleSign(authToken);
+          console.log(response);
         }}
         onError={() => {
           console.log("Login Failed");
         }}
+        useOneTap
       />
     </div>
   );
