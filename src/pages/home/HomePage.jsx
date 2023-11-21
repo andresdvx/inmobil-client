@@ -4,38 +4,23 @@ import { AuthContext } from "../../context/AuthContext";
 import { parseISO, format } from "date-fns";
 import { es } from "date-fns/locale";
 import NavBar from "../../components/NavBar";
+import PostCard from "../../components/PostCard";
+import InfoCard from "../../components/InfoCard";
+import "../../app.css";
+
 const HomePage = () => {
-  const { userData } = useContext(AuthContext);
-  let user_id;
-  let user;
-  let email;
-  let createdAt;
-  
-  if (userData) {
-    user_id = userData.user_id;
-    user = userData.user;
-    email = userData.email;
-    createdAt = userData.createdAt;
-  }
+  // ... (código comentado para el contexto de usuario)
 
-  let date = "";
-  let dateFormated = "";
-
-  if (createdAt) {
-    date = parseISO(createdAt);
-    dateFormated = format(date, "dd  MMMM yyyy", { locale: es });
-  }
-
- 
   return (
-    <div className="bg-zinc-50 dark:bg-background2 dark:text-white w-screen h-screen">
-      <NavBar/>
-      {user_id && <p>{user_id}</p>}
-      {user && <p>{user}</p>}
-      {email && <p>{email}</p>}
-      {createdAt && <p>{dateFormated}</p>}
-      {/* <Infocard /> */}
-      
+    <div className="bg-zinc-50 dark:bg-background2 dark:text-white min-h-screen flex justify-evenly items-center">
+      <NavBar />
+      <main className="" id="main-content">
+        <div className="flex flex-col justify-center w-full">
+          <PostCard />
+          <PostCard />
+          <PostCard />
+        </div>
+      </main>
     </div>
   );
 };
