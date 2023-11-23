@@ -8,10 +8,14 @@ import {
   MoonIcon,
 } from "../assets/NavIcons";
 import { Image, Avatar } from "@nextui-org/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import NewPostForm from "./NewPostForm";
+import { AuthContext } from "../context/AuthContext";
 
 const NavItems = () => {
+
+  const {userData} = useContext(AuthContext);
+  console.log(userData);
   const [theme, setTheme] = useState();
   const x = () => {
     if (localStorage.tema == "dark") {
@@ -43,7 +47,7 @@ const NavItems = () => {
           <Avatar
             size="sm"
             isBordered
-            src="https://i.pinimg.com/564x/8a/64/ff/8a64ffe27232d40c19bd7a094a0d7a38.jpg"
+            src={userData && userData.photo}
           />
         </div>
         <p className="hidden lg:flex">Profile</p>

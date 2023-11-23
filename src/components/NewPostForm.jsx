@@ -13,9 +13,11 @@ import {
 } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 import { NewPostIcon } from "../assets/NavIcons";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PostContext } from "../context/PostContext";
 
 export default function NewPostForm() {
+  const { createPost, loading } = useContext(PostContext);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const [post, setPost] = useState({
@@ -43,10 +45,20 @@ export default function NewPostForm() {
     }
   };
 
-  const onSubmit = (evt) => {
+  const onSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(pictures,"=> pictures we");
-    console.log(post,"=> post we");
+    const formData = new FormData();
+    formData.append("description", post.description);
+    formData.append("location", post.location);
+    formData.append("price", post.price);
+    formData.append("typo", post.type);
+    for (let i = 0; i < pictures.length; i++) {
+      formData.append("pictures", pictures[i]);
+    }
+    await createPost(formData);
+    if (!loading) {
+      window.location.reload();
+    }
   };
 
   const types = [

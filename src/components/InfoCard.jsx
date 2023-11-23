@@ -1,34 +1,40 @@
-import {Card, CardHeader, CardBody, CardFooter, Divider,Image, Button} from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  User,
+  Link,
+} from "@nextui-org/react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
-const Infocard = ()=> {
-    const {userData} = useContext(AuthContext);
-
+const Infocard = () => {
+  const { userData } = useContext(AuthContext);
+  const photo = userData.photo;
   return (
     <Card className="hidden max-w-[400px] lg:flex">
       <CardHeader className="flex gap-3">
-        <Image
-          alt="nextui logo"
-          height={40}
-          radius="sm"
-          src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-          width={40}
+        <User
+          name={userData.email}
+          description={
+            <Link href="https://twitter.com/jrgarciadev" size="sm" isExternal>
+              @{userData.user}
+            </Link>
+          }
+          avatarProps={{
+            src: photo,
+          }}
         />
-        <div className="flex flex-col">
-          <p className="text-md">{userData.user}</p>
-          <p className="text-small text-default-500">{userData.email}</p>
-        </div>
       </CardHeader>
-      <Divider/>
+      <Divider />
       <CardBody>
-        <p>Make a new Post</p>
+        <p>{userData.biography}</p>
       </CardBody>
-      <Divider/>
-      <CardFooter>
-        <Button variant="flat">New Post</Button>
-      </CardFooter>
+      <Divider />
+      <CardFooter></CardFooter>
     </Card>
   );
-}
- export default Infocard;
+};
+export default Infocard;
