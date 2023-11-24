@@ -15,7 +15,6 @@ import { AuthContext } from "../context/AuthContext";
 const NavItems = () => {
 
   const {userData} = useContext(AuthContext);
-  console.log(userData);
   const [theme, setTheme] = useState();
   const x = () => {
     if (localStorage.tema == "dark") {
@@ -32,7 +31,7 @@ const NavItems = () => {
   return (
     <>
       <div className="hidden sm:grid w-full h-20 place-content-center">
-        <Image width={50} height={50} src="inmobil.png" radius="sm" />
+        <Image width={50} height={50} src="/inmobil.png" radius="sm" />
       </div>
       {/* items */}
       <Link

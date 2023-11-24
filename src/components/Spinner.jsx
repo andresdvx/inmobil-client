@@ -2,7 +2,7 @@ import { BeatLoader } from "react-spinners";
 
 const Spinner = () => {
   return (
-      <BeatLoader color="#f56965"/>
+      <BeatLoader color="#f56965" className="mx-auto"/>
   );
 };
 

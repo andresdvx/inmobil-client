@@ -21,11 +21,12 @@ export const AuthProvider = ({ children }) => {
     try {
       setLoading(true);
       const response = await apiSignIn(data);
-
       setUserData(response.data);
+      setAuthenticated(true);
       return response;
     } catch (error) {
       console.log(error);
+      setAuthenticated(false);
       if (error.response.status != 500) {
         setError(error.response.data);
         return;

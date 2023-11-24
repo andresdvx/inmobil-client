@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
-import { getPostsApi, createPostApi } from "../api/postRequest";
+import { getPostsApi,getPostApi, createPostApi } from "../api/postRequest";
+import { tr } from "date-fns/locale";
 export const PostContext = createContext();
 
 export const PostProvider = ({ children }) => {
@@ -21,6 +22,15 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const getPost = async(post_id)=>{
+    try {
+      const response = await getPostApi(post_id);
+      return response.data;
+    } catch (error) {
+      console.log(error, "=> get a post");
+    }
+  };
+
   const createPost = async (data) => {
     try {
       setLoading(true);
@@ -34,7 +44,7 @@ export const PostProvider = ({ children }) => {
   };
 
   return (
-    <PostContext.Provider value={{ createPost, getPosts, posts, loading }}>
+    <PostContext.Provider value={{ createPost, getPosts, getPost, posts, loading }}>
       {children}
     </PostContext.Provider>
   );
