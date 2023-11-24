@@ -51,7 +51,7 @@ export default function NewPostForm() {
     formData.append("description", post.description);
     formData.append("location", post.location);
     formData.append("price", post.price);
-    formData.append("typo", post.type);
+    formData.append("type", post.type);
     for (let i = 0; i < pictures.length; i++) {
       formData.append("pictures", pictures[i]);
     }

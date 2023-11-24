@@ -5,10 +5,10 @@ import {
   CardFooter,
   Divider,
   User,
-  Link,
 } from "@nextui-org/react";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Infocard = () => {
   const { userData } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const Infocard = () => {
         <User
           name={userData.email}
           description={
-            <Link href="" size="sm" isExternal>
+            <Link to={`/profile/${userData.user_id}`}>
               @{userData.user}
             </Link>
           }

@@ -6,17 +6,20 @@ import { AuthProvider } from "./context/AuthContext";
 import AppRoutes from "./routes/AppRoutes";
 import "./app.css";
 import { PostProvider } from "./context/PostContext";
+import { UserProvider } from "./context/UserContext";
 
 const App = () => {
   return (
     <NextUIProvider>
       <GoogleOAuthProvider clientId="814836190695-tpbaduo3d2ikak1d5ne3a0251qfo281n.apps.googleusercontent.com">
         <AuthProvider>
-          <PostProvider>
-            <Router>
-              <AppRoutes />
-            </Router>
-          </PostProvider>
+          <UserProvider>
+            <PostProvider>
+              <Router>
+                <AppRoutes />
+              </Router>
+            </PostProvider>
+          </UserProvider>
         </AuthProvider>
       </GoogleOAuthProvider>
     </NextUIProvider>

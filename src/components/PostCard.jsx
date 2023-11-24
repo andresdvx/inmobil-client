@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import { User } from "@nextui-org/react";
-import { useContext} from "react";
-import { PostContext } from "../context/PostContext";
-import dateParser from "../helpers/DateParser";
+import dateParser from "../helpers/dateParser";
 const PostCard = ({posts}) => {
   return posts.map((post) => {
     return (
       <Link to={`/post/${post.post_id}`}
         key={post.post_id}
-        className="max-w-md bg-white  shadow dark:bg-[#27272A] dark:border-gray-700 mx-auto lg:mx-0 my-auto mt-1"
+        className="max-w-md bg-white shadow dark:bg-[#27272A] dark:border-gray-700 mx-auto lg:mx-0 my-auto mt-1"
         style={{ Width: "380px" }}
       >
         <header>

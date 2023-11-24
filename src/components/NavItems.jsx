@@ -41,7 +41,7 @@ const NavItems = () => {
         <HomeIcon />
         <p className="hidden lg:flex">Home</p>
       </Link>
-      <Link className="grow h-12 flex justify-evenly items-center || lg:w-full  lg:relative">
+      <Link className="grow h-12 flex justify-evenly items-center || lg:w-full  lg:relative" to={userData && `/profile/${userData.user_id}`}>
         <div className="lg:absolute lg:left-4">
           <Avatar
             size="sm"
