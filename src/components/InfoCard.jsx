@@ -19,7 +19,7 @@ const Infocard = () => {
         <User
           name={userData.email}
           description={
-            <Link href="https://twitter.com/jrgarciadev" size="sm" isExternal>
+            <Link href="" size="sm" isExternal>
               @{userData.user}
             </Link>
           }

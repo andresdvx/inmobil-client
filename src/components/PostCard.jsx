@@ -10,7 +10,7 @@ const PostCard = ({posts}) => {
       <Link to={`/post/${post.post_id}`}
         key={post.post_id}
         className="max-w-md bg-white  shadow dark:bg-[#27272A] dark:border-gray-700 mx-auto lg:mx-0 my-auto mt-1"
-        style={{ minWidth: "420px" }}
+        style={{ Width: "380px" }}
       >
         <header>
           {/* <Link to={""}> */}

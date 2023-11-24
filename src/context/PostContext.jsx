@@ -43,8 +43,12 @@ export const PostProvider = ({ children }) => {
     }
   };
 
+  const createEstate = async ()=>{
+
+  };
+
   return (
-    <PostContext.Provider value={{ createPost, getPosts, getPost, posts, loading }}>
+    <PostContext.Provider value={{ createPost, createEstate, getPosts, getPost, posts, loading }}>
       {children}
     </PostContext.Provider>
   );

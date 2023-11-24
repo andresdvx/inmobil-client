@@ -5,8 +5,8 @@ import SignInPage from "../pages/auth/SignInPage";
 import SignUpPage from "../pages/auth/SignUpPage";
 import HomePage from "../pages/home/HomePage";
 import NotFound from "../pages/home/NotFound";
-import NewPostPage from "../pages/home/NewPostPage";
-import { GetPost } from "../pages/home/GetPost";
+import GetPost from "../pages/home/GetPost";
+import NewEstateForm from "../pages/home/NewEstateForm";
 const AppRoutes = () => {
   return (
     <Routes>
@@ -15,6 +15,7 @@ const AppRoutes = () => {
       <Route path="/feed" element={<HomePage />}></Route>
       <Route element={<ProtectRoutes />}>
         <Route path="/post/:post_id" element={<GetPost />}></Route>
+        <Route path="/post/create-estate/:post_id" element={<NewEstateForm />}></Route>
       </Route>
       <Route path="*" element={<NotFound />}></Route>
     </Routes>
